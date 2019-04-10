@@ -2,7 +2,7 @@ const sql = require('mssql')
  
 // async/await style:
 const pool = new sql.ConnectionPool({
-    server: 'localhost\\DESKTOP-SB9SU5F',
+    server: 'DESKTOP-SB9SU5F',
     user: 'kryvkovr',
     password: '1',
     database: 'master',
@@ -16,7 +16,8 @@ const pool = new sql.ConnectionPool({
 async function messageHandler() {
     await pool; // ensures that the pool has been created
     try {
-    	const request = pool.request(); // or: new sql.Request(pool1)
+        console.log(pool)
+    	const request = new pool.request(); // or: new sql.Request(pool1)
     	const result = request.query('select 1 as number')
     	console.dir(result)
     	return result;
