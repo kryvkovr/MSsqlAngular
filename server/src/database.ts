@@ -1,13 +1,22 @@
-import mysql from 'promise-mysql';
+// import mysql from 'promise-mysql';
+
+import sql from 'mssql';
+
+
 
 import keys from './keys';
 
-const pool = mysql.createPool(keys.database);
+console.log('asdasd')
+const pool = new sql.ConnectionPool(keys.database).connect();
 
-pool.getConnection()
-    .then(connection => {
-        pool.releaseConnection(connection);
-        console.log('DB is Connected');
-    });
+// pool.on('error', err => {
+//     console.log(err)
+// })
+
+// pool.getConnection()
+//     .then(connection => {
+//         pool.releaseConnection(connection);
+//         console.log('DB is Connected');
+//     });
 
 export default pool;

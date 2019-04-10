@@ -4,7 +4,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 
 import indexRoutes from './routes/indexRoutes';
-// import gamesRoutes from './routes/gamesRoutes';
+import gamesRoutes from './routes/gamesRoutes';
 
 class Server {
 
