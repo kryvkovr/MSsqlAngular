@@ -1,35 +1,28 @@
 import { Request, Response } from 'express';
 import sql from 'mssql';
-import connection from '../database';
+import { executeSql } from '../database/database';
 
 class GamesController {
-
-    public async list(req: Request, res: Response): Promise<void> {
-        // await pool;
+    public async list(req: Request, res: Response): Promise<any> {
         try {
-            // console.log(pool)
-            // const request = pool.request(); // or: new sql.Request(pool1)
-            // const result = request.query('select * from Student')
-            // console.log(result)
-            // return result;
-
-
-            const pool = await connection.connect();
-            const sqlQuery = "select * from Student"
-            const request = new sql.Request(pool); // or: new sql.Request(pool1)
-            const result= await request.query(sqlQuery);
-            connection.close();
-            return res.json(result);
-
-            // return result;
-
+            const query = "SELECT * FROM Games";
+            const result = await executeSql(query);
+            res.json(result.recordset);
         } catch (err) {
-            console.error('SQL error', err);
+            res.status(404).json({ text: "No games" });
         }
     }
 
     public async getOne(req: Request, res: Response): Promise<any> {
-        // const { id } = req.params;
+        try {
+            const { id } = req.params;
+            const query = `SELECT * FROM Games WHERE id = ${id}`;
+            const result = await executeSql(query);
+            res.json(result);
+        } catch (err) {
+            res.status(404).json({ text: "The game doesn't exits" });
+        }
+
         // const games = await pool.query('SELECT * FROM games WHERE id = ?', [id]);
         // console.log(games.length);
         // if (games.length > 0) {

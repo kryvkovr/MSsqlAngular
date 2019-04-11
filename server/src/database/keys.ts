@@ -1,7 +1,7 @@
 export default {
     database:{
-        server: 'TULSA',
-        user: 'tut',
+        server: 'DESKTOP-SB9SU5F',
+        user: 'kryvkovr',
         password: '1',
         database: 'tutorial',
         port: 1433,

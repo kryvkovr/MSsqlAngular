@@ -6,7 +6,7 @@
         <i class="far fa-trash-alt"></i>
       </button>
     </div>
-    <img class="card-img-top" [src]="game.image">
+    <img *ngIf="game.image" class="card-img-top" [src]="game.image">
     <div class="card-body">
       <p>{{game.description}}</p>
       <p>Created At {{game.created_at | date: 'yyyy-MM-dd'}}</p>
